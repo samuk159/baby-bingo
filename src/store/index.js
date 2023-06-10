@@ -7,13 +7,13 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         controlValue: {
-            showLayout: false,
+            showLayout: true,
             floatLayout: true,
             enableDownload: true,
             previewModal: true,
-            paginateElementsByHeight: 1100,
-            manualPagination: false,
-            filename: 'Hee Hee',
+            paginateElementsByHeight: 520,
+            manualPagination: true,
+            filename: 'cartelas',
             pdfQuality: 2,
             pdfFormat: 'a4',
             pdfOrientation: 'portrait',

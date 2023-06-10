@@ -73,3 +73,9 @@ input, textarea {
     animation-fill-mode: forwards;
     animation-timing-function: ease-in-out;
 }
+
+@font-face {
+    font-family: 'BabyPumpkin';
+    src: url('/BabyPumpkin.ttf'); /* IE9 Compat Modes */
+    src: url('/BabyPumpkin.ttf')  format('truetype'), /* Safari, Android, iOS */
+}

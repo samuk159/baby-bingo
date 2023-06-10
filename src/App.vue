@@ -58,7 +58,7 @@ export default {
       return {
         margin: 0,
 
-        filename: "hee hee.pdf",
+        filename: "cartelas.pdf",
 
         image: {
           type: "jpeg",

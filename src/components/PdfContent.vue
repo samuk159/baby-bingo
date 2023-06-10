@@ -1,6 +1,21 @@
 <template>
   <section class="pdf-content">
-    <section class="report-info">
+    <div class="cartela-container pt-5">
+      
+      <div class="cartela bg-white">
+        <div class="row">
+          <div class="col text-center">
+            A
+          </div>
+          <div class="col text-center">
+            B
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- <section class="report-info">
       <section class="image-container">
         <img
           class="user-image"
@@ -35,7 +50,7 @@
       <h4 class="time">November 11, 2019 1:00 PM - 2:23 PM</h4>
 
       <apexchart type="area" height="100%" width="100%" :options="chartOptions" :series="series" />
-    </section>
+    </section> -->
   </section>
 </template>
 
@@ -43,7 +58,11 @@
 export default {
   data() {
     return {
-      series: [
+      cartelas: [],
+      palavras: ['Babador', 'Chupeta', 'Banheira', 'Manta', 'Berço', 'Fralda', 'Papinha', 'Carrinho', 'Macacão', 'Sapatinho', 'Chocalho', 'Mamadeira', 'Naninha', 'Pelúcia', 'Enxoval', 'Leite', 'Brinquedo', 'Algodão', 'Sabonete', 'Lencinho'],
+      numeroDeCartelas: 2,
+      palavrasPorLinha: 2
+      /*series: [
         {
           name: "Level",
           data: [
@@ -156,22 +175,78 @@ export default {
 
           type: "text",
         },
-      },
+      },*/
     };
   },
 
   mounted() {
+    this.generateCartelas();
+
     this.$nextTick(() => {
       setTimeout(() => {
         this.$emit("domRendered");
       }, 1000);
     });
   },
+
+  methods: {
+    generateCartelas() {
+      for (let i = 0; i < this.numeroDeCartelas; i++) {
+        let palavrasPorCartela = Math.pow(this.palavrasPorLinha, 2);
+        let currentWords = [];
+
+        while (currentWords.length < palavrasPorCartela) {
+          let word = this.getRandomWord();
+
+          if (!currentWords.includes(word)) {
+            currentWords.push(word);
+          }
+        }
+
+        let cartela = [];
+        let currentLinhaIndex = 0;
+        for (let j = 0; j < currentWords.length; j++) {
+          let word = currentWords[j];
+
+          if (!cartela[currentLinhaIndex]) {
+            cartela[currentLinhaIndex] = [];
+          }
+
+          cartela[currentLinhaIndex].push(word);
+
+          if (cartela[currentLinhaIndex].length >= this.palavrasPorLinha) {
+            currentLinhaIndex++;
+          }
+        }
+
+        this.cartelas.push(cartela);
+      }
+
+      console.log(this.cartelas);
+    },
+
+    getRandomWord() {
+      return this.palavras[this.getRandomInt(0, this.palavras.length - 1)];
+    },
+
+    getRandomInt(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
+.cartela-container {
+  background-image: url("../assets/background.png");
+  background-size: 760px;
+  height: 760px;
+}
+
 .pdf-content {
+  padding: 20px;
   width: 100%;
   background: #fff;
 

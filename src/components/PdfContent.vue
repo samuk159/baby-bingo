@@ -21,11 +21,13 @@
 </template>
 
 <script>
+import { palavras } from '../palavras.js'
+
 export default {
   data() {
     return {
       cartelas: [],
-      palavras: ['Babador', 'Chupeta', 'Banheira', 'Manta', 'Berço', 'Fralda', 'Papinha', 'Carrinho', 'Macacão', 'Sapatinho', 'Chocalho', 'Mamadeira', 'Naninha', 'Pelúcia', 'Enxoval', 'Leite', 'Brinquedo', 'Algodão', 'Sabonete', 'Lencinho', 'Mamãe', 'Papai', 'Titio', 'Titia', 'Vovô', 'Vovó', 'Móbile', 'Moisés', 'Colinho', 'Body', 'Mordedor'],
+      palavras: [],
       numeroDeCartelas: 4,
       palavrasPorLinha: 4,
       azulIndexes: [
@@ -44,6 +46,7 @@ export default {
   },
 
   mounted() {
+    this.palavras = palavras;
     console.log(this.palavras.length);
     this.generateCartelas();
 

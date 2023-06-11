@@ -1,9 +1,9 @@
 <template>
   <section class="pdf-content">
-    <div v-for="(cartela, indexCartela) in cartelas" :key="'cartela_' + indexCartela" style="padding: 20px !important;">
+    <div v-for="(cartela, indexCartela) in cartelas" :key="'cartela_' + indexCartela" class="borda-cartela">
       <div class="cartela-container">
         
-        <div class="cartela bg-white mx-3 p-1">
+        <div class="cartela bg-white mx-2 p-1">
           <div v-for="(linha, indexLinha) in cartela" :key="'linha_' + indexLinha" class="row py-1 mx-n1">
             <div v-for="(coluna, indexColuna) in linha" :key="'coluna_' + indexColuna" class="col text-center px-1">
 
@@ -26,7 +26,7 @@ export default {
     return {
       cartelas: [],
       palavras: ['Babador', 'Chupeta', 'Banheira', 'Manta', 'Berço', 'Fralda', 'Papinha', 'Carrinho', 'Macacão', 'Sapatinho', 'Chocalho', 'Mamadeira', 'Naninha', 'Pelúcia', 'Enxoval', 'Leite', 'Brinquedo', 'Algodão', 'Sabonete', 'Lencinho', 'Mamãe', 'Papai', 'Titio', 'Titia', 'Vovô', 'Vovó', 'Móbile', 'Moisés', 'Colinho', 'Body', 'Mordedor'],
-      numeroDeCartelas: 3,
+      numeroDeCartelas: 4,
       palavrasPorLinha: 4,
       azulIndexes: [
         [0, 2],
@@ -44,6 +44,7 @@ export default {
   },
 
   mounted() {
+    console.log(this.palavras.length);
     this.generateCartelas();
 
     this.$nextTick(() => {
@@ -103,10 +104,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.borda-cartela {
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+  padding-left: 5px !important;
+  padding-right: 10px !important;
+}
+
 .cartela-container {
   background-image: url("../assets/background.png");
-  background-size: 760px;
-  height: 520px;
+  background-size: 785px;
+  height: 364px;
   padding-top: 75px;
 }
 
@@ -117,8 +125,8 @@ export default {
 
 .cell-container {
   border: 3px dashed #ccc;
-  height: 98px;
-  line-height: 98px;
+  height: 60px;
+  line-height: 55px;
   font-family: BabyPumpkin;
   font-size: 30px;
   overflow: hidden;

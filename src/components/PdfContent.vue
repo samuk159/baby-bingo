@@ -21,7 +21,8 @@
 </template>
 
 <script>
-import { palavras } from '../palavras.js'
+//import { palavras } from '../palavras.js'
+import {} from '../palavras.js'
 
 export default {
   data() {
@@ -46,7 +47,7 @@ export default {
   },
 
   mounted() {
-    this.palavras = palavras;
+    this.palavras = window.palavras;
     console.log(this.palavras.length);
     this.generateCartelas();
 

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sorteador baby bingo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="assets/css/jquery.toast.min.css">-->
+    <!--<link rel="stylesheet" href="assets/css/style.css">-->
+    <!--<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">-->
+    <script src="../src/palavras.js"></script>
+</head>
+<body>
+    <div id="app" style="height: 100vh; overflow: scroll;" class="p-3">
+
+        <div class="row justify-content-center mb-3">
+            <div class="col-auto">
+                <button type="button" class="btn btn-lg btn-primary" @click="getNextWord" :disabled="!nextWordButtonActive || currentWords.length >= palavras.length">
+                    <h1 v-if="nextWordButtonActive">Próxima palavra</h1>
+                    <h1 v-else>{{currentCountDown}}</h1>
+                </button>
+            </div>
+        </div>
+
+        <div v-for="(word, index) in currentWords" :key="index" class="row justify-content-center">
+            <div class="col-auto">
+                <div v-if="index == 0" class="first-word font-weight-bold my-3">
+                    {{word}}
+                </div>
+                <h1 v-else>{{word}}</h1>
+            </div>
+        </div>
+
+        <div class="row justify-content-center my-5">
+            <div class="col-auto">
+                <button type="button" class="btn btn-lg btn-danger" @click="reset">
+                    <h1>Limpar</h1>
+                </button>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                palavras: window.palavras,
+                currentWords: [],
+                nextWordButtonActive: true,
+                countdownStart: 8,
+                currentCountDown: null
+            },
+
+            mounted() {
+                
+            },
+
+            methods: {
+                getNextWord() {
+                    let word = this.getRandomWord();
+
+                    if (!this.currentWords.includes(word)) {
+                        this.currentWords.unshift(word);
+                    } else {
+                        this.getNextWord();
+                        return;
+                    }
+
+                    this.startCountdown();
+                },
+
+                startCountdown() {
+                    this.nextWordButtonActive = false;
+                    this.currentCountDown = this.countdownStart;
+                    this.nextCountdown();
+                },
+
+                nextCountdown() {
+                    if (this.currentCountDown > 0) {
+                        setTimeout(() => {
+                            this.currentCountDown--;
+                            this.nextCountdown();
+                        }, 1000);
+                    } else {
+                        this.nextWordButtonActive = true;
+                    }
+                },
+
+                getRandomWord() {
+                    return this.palavras[this.getRandomInt(0, this.palavras.length - 1)];
+                },
+
+                getRandomInt(min, max) {
+                    min = Math.ceil(min);
+                    max = Math.floor(max);
+                    return Math.floor(Math.random() * (max - min + 1)) + min;
+                },
+
+                reset() {
+                    if (confirm("Tem certeza?")) {
+                        this.currentWords = [];
+                    }
+                }
+            }
+        });
+    </script>
+    <style>
+        .first-word {
+            font-size: 150px;    
+        }
+    </style>
+</body>
+</html>

@@ -7,7 +7,7 @@
           <div v-for="(linha, indexLinha) in cartela" :key="'linha_' + indexLinha" class="row py-1 mx-n1">
             <div v-for="(coluna, indexColuna) in linha" :key="'coluna_' + indexColuna" class="col text-center px-1">
 
-              <div class="cell-container text-center align-middle" :class="{ 'letra-azul': indexColuna % 2 == 0, 'letra-rosa': indexColuna % 2 != 0 }">
+              <div class="cell-container text-center align-middle" :class="{ 'letra-azul': azulIndexes[indexLinha].includes(indexColuna), 'letra-rosa': rosaIndexes[indexLinha].includes(indexColuna) }">
                 {{coluna}}
               </div>
 
@@ -25,9 +25,21 @@ export default {
   data() {
     return {
       cartelas: [],
-      palavras: ['Babador', 'Chupeta', 'Banheira', 'Manta', 'Berço', 'Fralda', 'Papinha', 'Carrinho', 'Macacão', 'Sapatinho', 'Chocalho', 'Mamadeira', 'Naninha', 'Pelúcia', 'Enxoval', 'Leite', 'Brinquedo', 'Algodão', 'Sabonete', 'Lencinho'],
+      palavras: ['Babador', 'Chupeta', 'Banheira', 'Manta', 'Berço', 'Fralda', 'Papinha', 'Carrinho', 'Macacão', 'Sapatinho', 'Chocalho', 'Mamadeira', 'Naninha', 'Pelúcia', 'Enxoval', 'Leite', 'Brinquedo', 'Algodão', 'Sabonete', 'Lencinho', 'Mamãe', 'Papai', 'Titio', 'Titia', 'Vovô', 'Vovó', 'Móbile', 'Moisés', 'Colinho', 'Body', 'Mordedor'],
       numeroDeCartelas: 3,
-      palavrasPorLinha: 4
+      palavrasPorLinha: 4,
+      azulIndexes: [
+        [0, 2],
+        [1, 3],
+        [0, 2],
+        [1, 3]
+      ],
+      rosaIndexes: [
+        [1, 3],
+        [0, 2],
+        [1, 3],
+        [0, 2]
+      ]
     };
   },
 

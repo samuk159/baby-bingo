@@ -22,14 +22,14 @@
 
 <script>
 //import { palavras } from '../palavras.js'
-import {} from '../palavras.js'
+import {} from '../../docs/palavras.js'
 
 export default {
   data() {
     return {
       cartelas: [],
       palavras: [],
-      numeroDeCartelas: 4,
+      numeroDeCartelas: 45,
       palavrasPorLinha: 4,
       azulIndexes: [
         [0, 2],

@@ -60,6 +60,7 @@ export default {
 
   methods: {
     generateCartelas() {
+      loop1:
       for (let i = 0; i < this.numeroDeCartelas; i++) {
         let palavrasPorCartela = Math.pow(this.palavrasPorLinha, 2);
         let currentWords = [];
@@ -69,6 +70,31 @@ export default {
 
           if (!currentWords.includes(word)) {
             currentWords.push(word);
+          }
+        }
+
+        if (this.cartelas.length) {
+          loop2:
+          for (let cartela of this.cartelas) {
+            let matchedWords = [];
+
+            loop3:
+            for (let linha of cartela) {
+              loop4:
+              for (let word of currentWords) {
+                if (linha.includes(word)) {
+                  matchedWords.push(word);
+                } 
+              }
+            }
+
+            if (matchedWords.length >= palavrasPorCartela) { debugger;
+              console.log('Encontrou cartela repetida');
+              console.log('currentWords: ' + currentWords);
+              console.log('matchedWords: ' + matchedWords);
+              i--;
+              continue loop1;
+            }
           }
         }
 

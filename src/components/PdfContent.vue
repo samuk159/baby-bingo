@@ -29,7 +29,7 @@ export default {
     return {
       cartelas: [],
       palavras: [],
-      numeroDeCartelas: 45,
+      numeroDeCartelas: 60,
       palavrasPorLinha: 4,
       azulIndexes: [
         [0, 2],
